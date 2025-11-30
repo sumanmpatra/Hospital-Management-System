@@ -1,8 +1,10 @@
 package hospital.management.system;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*; // event.ActionListener || event.ActionEvent
+import java.sql.ResultSet;
 
-public class Login extends JFrame{
+public class Login extends JFrame implements ActionListener{
 
     JTextField textfield;
     JPasswordField passwordfield;
@@ -63,6 +65,7 @@ public class Login extends JFrame{
         b1.setFont(new Font("serif", Font.BOLD, 15));
         b1.setBackground(Color.black);
         b1.setForeground(Color.white);
+        b1.addActionListener(this);
         add(b1);
 
 
@@ -73,17 +76,47 @@ public class Login extends JFrame{
         b2.setFont(new Font("serif", Font.BOLD, 15));
         b2.setBackground(Color.red);
         b2.setForeground(Color.white);
+        b2.addActionListener(this);
         add(b2);
 
 
         // Frame Settings
-        
+
         getContentPane().setBackground(new Color(109, 164, 170));
         setSize(750, 300);
         setLocation(300, 200);
         setVisible(true);
     }
+    
     public static void main(String[] args){
         new Login();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == b1){
+            try{
+                Connect c = new Connect();
+                String user = textfield.getText();
+                String passw = new String(passwordfield.getPassword());
+
+                String query = "select * from login where ID = '"+user+"' and PW = '"+passw+"'";
+                ResultSet resultset = c.statement.executeQuery(query);
+
+                if(resultset.next()){
+                    new Test();
+                    setVisible(false);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Invalid");
+                }
+            }
+            catch(Exception E){
+                E.printStackTrace();
+            }
+        }
+        else{
+            System.exit(0);
+        }
     }
 }
