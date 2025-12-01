@@ -104,7 +104,7 @@ public class Login extends JFrame implements ActionListener{
                 ResultSet resultset = c.statement.executeQuery(query);
 
                 if(resultset.next()){
-                    new Test();
+                    new Reception();
                     setVisible(false);
                 }
                 else{
