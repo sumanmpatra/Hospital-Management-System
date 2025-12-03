@@ -2,23 +2,25 @@ package hospital.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.util.*;
 
 
-public class NewPatient extends JFrame{
+public class NewPatient extends JFrame implements ActionListener{
     JComboBox<String> combobox;
     JTextField namefield, numberfield,  diseasefield, depositefield;
     JRadioButton r1, r2;
+    ButtonGroup group; 
     JLabel datelabel;
     JButton b1, b2;
+    Choice c1;
 
     NewPatient(){
-
         // Panel setup
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(5, 5, 790, 490);
+        panel.setBounds(1, 1, 798, 498);
         panel.setBackground(new Color( 90, 90, 90));
         add(panel);
 
@@ -103,6 +105,9 @@ public class NewPatient extends JFrame{
         r2.setBackground(Color.lightGray);
         panel.add(r2);
 
+        group = new ButtonGroup();
+        group.add(r1);
+        group.add(r2);
 
         // Disease input
         JLabel diseaselabel = new JLabel("Disease :");
@@ -127,7 +132,22 @@ public class NewPatient extends JFrame{
         panel.add(roomlabel);
 
 
-        // Currently no room class is available so we will skip this part
+        c1 = new Choice();
+        try{
+            Connect c = new Connect();
+            ResultSet result = c.statement.executeQuery("select * from room");
+            while(result.next()){
+                String data = result.getString("room_no") + " - "+ result.getString("Availaibility");
+                c1.add(data);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        c1.setBounds(300, 270, 130, 25);
+        c1.setFont(new Font("Tahoma", Font.BOLD, 12));
+        c1.setBackground(Color.LIGHT_GRAY);
+        panel.add(c1);
 
 
         // Time input
@@ -164,15 +184,7 @@ public class NewPatient extends JFrame{
         b1.setBackground(Color.red);
         b1.setFont(new Font("Tahoma", Font.BOLD, 15));
         b1.setForeground(Color.white);
-        b1.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                // action
-
-                
-            }
-        
-        });
+        b1.addActionListener(this);
         panel.add(b1);
 
 
@@ -181,14 +193,7 @@ public class NewPatient extends JFrame{
         b2.setBackground(Color.black);
         b2.setFont(new Font("Tahoma", Font.BOLD, 15));
         b2.setForeground(Color.white);
-        b2.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                // action
-
-
-            }
-        });
+        b2.addActionListener(this);
         panel.add(b2);
 
 
@@ -202,5 +207,46 @@ public class NewPatient extends JFrame{
     }
     public static void main(String[] args){
         new NewPatient();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        // action
+        if(e.getSource() == b1){
+            try{
+
+                String s1 = (String)combobox.getSelectedItem();
+                String s2 = numberfield.getText();
+                String s3 = namefield.getText();
+                String s4 = null; //gender
+                if(r1.isSelected()){
+                    s4 = "Male";
+                }
+                else if(r2.isSelected()){
+                    s4 = "Female";
+                }
+                String s5 = diseasefield.getText();
+                String s6 = c1.getSelectedItem();
+                String s7 = datelabel.getText();
+                String s8 = depositefield.getText();
+
+                Connect c = new Connect();
+                String query1 = "insert into patient values (\"" + s1 + "\", \"" + s2 + "\", \"" + s3 + "\", \"" + s4 + "\", \"" + s5 + "\", \"" + s6.substring(0, 3) + "\", \"" + s7 + "\", \""+ s8 + "\")";
+
+                String query2 = "update room set availaibility = 'occupied' where room_no =\""+s6.substring(0,3)+"\"";
+
+                c.statement.executeUpdate(query1);
+                c.statement.executeUpdate(query2);
+                JOptionPane.showMessageDialog(null, "Added Successfully!");
+                setVisible(false);
+            }
+            catch(Exception E){
+                E.printStackTrace();
+            }
+        }
+        else{
+            // JOptionPane.showConfirmDialog(rootPane, e, getTitle(), ABORT)
+            System.exit(0);
+        }
     }
 }
