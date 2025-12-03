@@ -56,8 +56,7 @@ public class Reception extends JFrame {
         button2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // Action
-
+                new Room();
             }
         });
 
@@ -165,9 +164,8 @@ public class Reception extends JFrame {
         button10.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // action
-
-
+                setVisible(false);
+                new Login();
             }
         });
 
