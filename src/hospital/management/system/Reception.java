@@ -68,12 +68,9 @@ public class Reception extends JFrame {
         button3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // Action
-
+                new Department();
             }
         });
-
-
 
         JButton button4 = new JButton("All Employee info");
         button4.setBounds(230, 20, 150, 30);
