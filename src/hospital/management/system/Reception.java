@@ -36,7 +36,6 @@ public class Reception extends JFrame {
         imglabel2.setBounds(850, 0, 300, 150);
         panel2.add(imglabel2);
 
-
         JButton button1 = new JButton("Add new Patient");
         button1.setBounds(40, 20, 150, 30);
         button1.setBackground(Color.orange);
@@ -90,9 +89,7 @@ public class Reception extends JFrame {
         button5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // action
-
-
+                new AllPatients();
             }
         });
 
