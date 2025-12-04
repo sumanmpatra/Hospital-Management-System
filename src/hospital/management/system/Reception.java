@@ -29,7 +29,6 @@ public class Reception extends JFrame {
         imglabel.setBounds(1150, 0, 150, 200);
         panel2.add(imglabel);
 
-
         ImageIcon imgicon2 = new ImageIcon(ClassLoader.getSystemResource("icons/amb.png"));
         Image img2 = imgicon2.getImage().getScaledInstance(300, 150, Image.SCALE_DEFAULT);
         ImageIcon imgicon3 = new ImageIcon(img2);
@@ -79,10 +78,7 @@ public class Reception extends JFrame {
         button4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // action 
-
-
-
+                new Employee();
             }
         });
 
