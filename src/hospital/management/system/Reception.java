@@ -100,10 +100,7 @@ public class Reception extends JFrame {
         button6.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // action 
-
-
-
+                new Discharge();
             }
         });
 

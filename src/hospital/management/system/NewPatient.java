@@ -216,7 +216,7 @@ public class NewPatient extends JFrame implements ActionListener{
                 Connect c = new Connect();
                 String query1 = "insert into patient values (\"" + s1 + "\", \"" + s2 + "\", \"" + s3 + "\", \"" + s4 + "\", \"" + s5 + "\", \"" + s6.substring(0, 3) + "\", \"" + s7 + "\", \""+ s8 + "\")";
 
-                String query2 = "update room set availaibility = 'occupied' where room_no =\""+s6.substring(0,3)+"\"";
+                String query2 = "update room set availaibility = 'Occupied' where room_no =\""+s6.substring(0,3)+"\"";
 
                 c.statement.executeUpdate(query1);
                 c.statement.executeUpdate(query2);
