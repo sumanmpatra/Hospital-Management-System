@@ -40,7 +40,7 @@ public class NewPatient extends JFrame implements ActionListener{
         panel.add(headinglabel);
 
         // ID input
-        JLabel idlabel = new JLabel("ID :");
+        JLabel idlabel = new JLabel("ID* :");
         idlabel.setBounds(30, 90, 100, 30);
         idlabel.setFont(new Font("Tahoma", Font.BOLD, 15));
         idlabel.setForeground(Color.white);

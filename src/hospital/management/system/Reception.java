@@ -108,12 +108,10 @@ public class Reception extends JFrame {
         button7.setBounds(420, 20, 150, 30);
         button7.setBackground(Color.orange);
         panel2.add(button7);
-        button2.addActionListener(new ActionListener(){
+        button7.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // action
-
-
+                new PatientUpdate();
             }
         });
 
